@@ -10,21 +10,18 @@ public class Main {
         t2.setName("Thread 2");
 
         t1.start();
-        // Can use a join to make sure t1 is executed completely before t2
-//        try {
-//            t1.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         t2.start();
     }
 }
 
 class Countdown {
 
-    //private int i;
+    private int i;
 
-    public void doCountdown() {
+    //Synchronized: Every object has an intrinsic lock. Each thread has to obtain that lock and then it can run the operation.
+    // So in synchronization we synchronize a block or a function and that means the thread has to obtain a lock and then it can
+    // proceed to execute the function or block. Please note each time only thread can execute the function or block.
+    public synchronized void doCountdown() {
         String color;
 
         switch(Thread.currentThread().getName()) {
@@ -38,7 +35,7 @@ class Countdown {
                 color = ThreadColor.ANSI_GREEN;
         }
 
-        for(int i=10; i>0; i--) {
+        for(i=10; i>0; i--) {
             System.out.println(color + Thread.currentThread().getName() + ": i= " + i);
         }
     }
