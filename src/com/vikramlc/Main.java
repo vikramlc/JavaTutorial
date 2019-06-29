@@ -10,13 +10,19 @@ public class Main {
         t2.setName("Thread 2");
 
         t1.start();
+        // Can use a join to make sure t1 is executed completely before t2
+//        try {
+//            t1.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         t2.start();
     }
 }
 
 class Countdown {
 
-    private int i;
+    //private int i;
 
     public void doCountdown() {
         String color;
@@ -32,7 +38,7 @@ class Countdown {
                 color = ThreadColor.ANSI_GREEN;
         }
 
-        for(i=10; i>0; i--) {
+        for(int i=10; i>0; i--) {
             System.out.println(color + Thread.currentThread().getName() + ": i= " + i);
         }
     }
