@@ -6,7 +6,8 @@ public class AnotherThread extends Thread {
         System.out.println(ThreadColor.ANSI_BLUE +  "Hello from " + currentThread().getName());
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(3000); // No statements after this are executed once an exception is thrown as this point of time.
+            System.out.println("Another thread is awake after sleeping for 3 seconds.");
         } catch (InterruptedException e) {
             System.out.println(ThreadColor.ANSI_BLUE + "Another thread woke me up.");
         }
