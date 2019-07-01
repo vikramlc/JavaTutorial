@@ -1,98 +1,77 @@
 package com.vikramlc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import static com.vikramlc.Main.EOF;
+
 public class Main {
+
+    public static final String EOF = "EOF";
+
     public static void main(String[] args) {
-        Message message = new Message();
-
-        new Thread(new Writer(message)).start();
-        new Thread(new Reader(message)).start();
+        List<String> buffer = new ArrayList<>();
+        MyProducer myProducer = new MyProducer(buffer, ThreadColor.ANSI_GREEN);
+        MyConsumer myConsumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE);
+        MyConsumer myConsumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN);
+        new Thread(myProducer).start();
+        new Thread(myConsumer1).start();
+        new Thread(myConsumer2).start();
     }
 }
 
-class Message {
-    private String message;
-    private boolean empty=true;
+class MyProducer implements Runnable{
+    private List<String> buffer;
+    private String color;
 
-    public synchronized String read() {
-        while(empty) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        empty=true;
-        notifyAll();
-        return message;
-    }
-
-    public synchronized void write(String message) {
-        while(!empty) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        empty=false;
-        notifyAll();
-        this.message=message;
-    }
-}
-
-class Writer implements Runnable {
-    private Message message;
-
-    public Writer(Message message) {
-        this.message = message;
+    public MyProducer(List<String> buffer, String color) {
+        this.buffer = buffer;
+        this.color = color;
     }
 
     @Override
     public void run() {
-        String messages[] = {
-                "Test1",
-                "Test2",
-                "Test3",
-                "Test4",
-                "Test5"
-        };
-
+        String[] nums = {"1", "2", "3", "4", "5", "6"};
         Random random = new Random();
 
-        for(int i=0; i<messages.length; i++) {
-            message.write(messages[i]);
+        for(String num: nums) {
+            System.out.println(color + "Adding " + num);
+            buffer.add(num);
+
+            try {
+                Thread.sleep(random.nextInt(1000));
+            } catch (InterruptedException e) {
+                System.out.println("Producer was interrupted.");
+            }
         }
 
-        try {
-            Thread.sleep(random.nextInt(2000));
-        } catch(InterruptedException e) {
+        System.out.println(color + "Adding EOF and Exiting!!");
+        buffer.add("EOF");
 
-        }
-        message.write("Finished Reading");
     }
 }
 
-class Reader implements Runnable {
-    private Message message;
+class MyConsumer implements Runnable {
+    private List<String> buffer;
+    private String color;
 
-    public Reader(Message message) {
-        this.message = message;
+    public MyConsumer(List<String> buffer, String color) {
+        this.buffer = buffer;
+        this.color = color;
     }
 
     @Override
     public void run() {
-        Random random = new Random();
-
-        for(String lastMessage=message.read(); lastMessage!="Finished Reading"; lastMessage=message.read()) {
-            System.out.println(lastMessage);
-            try {
-                Thread.sleep(random.nextInt(2000));
-            } catch(InterruptedException e) {
-
+        while(true) {
+            if(buffer.isEmpty()) {
+                continue;
+            }
+            if(buffer.get(0).equals(EOF)) {
+                System.out.println(color + "Exiting!!");
+                break;
+            } else {
+                System.out.println(color + "Removed " + buffer.remove(0));
             }
         }
     }
