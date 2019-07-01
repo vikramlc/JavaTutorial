@@ -1,68 +1,99 @@
 package com.vikramlc;
 
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        Countdown countdown = new Countdown();
+        Message message = new Message();
 
-        CountdownThread t1 = new CountdownThread(countdown);
-        t1.setName("Thread 1");
-        CountdownThread t2 = new CountdownThread(countdown);
-        t2.setName("Thread 2");
-
-        t1.start();
-        t2.start();
+        new Thread(new Writer(message)).start();
+        new Thread(new Reader(message)).start();
     }
 }
 
-class Countdown {
+class Message {
+    private String message;
+    private boolean empty=true;
 
-    private int i;
-
-    // when a method is synchronized only one thread can execute that at a time so when the thread is executing the
-    // method all other threads that want to call the method or any other synchronized method in that class will suspend
-    // until the thread running the method exits it then another thread can run a
-    // synchronized method then another etc to be clear if a class has three
-    // synchronize methods then only one of these methods can ever run at a time and
-    // only on one thread now since only one thread can execute a synchronized method
-    // at a time
-    // public synchronized void doCountdown() {
-    public void doCountdown() {
-        String color;
-
-        switch(Thread.currentThread().getName()) {
-            case "Thread 1":
-                color = ThreadColor.ANSI_CYAN;
-                break;
-            case "Thread 2":
-                color = ThreadColor.ANSI_PURPLE;
-                break;
-            default:
-                color = ThreadColor.ANSI_GREEN;
-        }
-
-        //Synchronized: Every object has an intrinsic lock. Each thread has to obtain that lock and then it can run the operation.
-        // So in synchronization we synchronize a block or a function and that means the thread has to obtain a lock and then it can
-        // proceed to execute the function or block. Please note each time only thread can execute the function or block.
-        // NOTE: Use synchronize always on a object instance or global variable and not on a local variable as it will be stored in Thread Stack.
-        // Thread will keep a copy of the variable in the Thread Stack and the values are stored in the Heap so we see the values
-        // updated by both the Threads.
-        synchronized (this) {
-            for(i=10; i>0; i--) {
-                System.out.println(color + Thread.currentThread().getName() + ": i= " + i);
+    public synchronized String read() {
+        while(empty) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+
+        empty=true;
+        notifyAll();
+        return message;
+    }
+
+    public synchronized void write(String message) {
+        while(!empty) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        empty=false;
+        notifyAll();
+        this.message=message;
     }
 }
 
-class CountdownThread extends Thread {
-    private Countdown countdownThread;
+class Writer implements Runnable {
+    private Message message;
 
-    public CountdownThread(Countdown countdown) {
-        this.countdownThread = countdown;
+    public Writer(Message message) {
+        this.message = message;
     }
 
     @Override
     public void run() {
-        countdownThread.doCountdown();
+        String messages[] = {
+                "Test1",
+                "Test2",
+                "Test3",
+                "Test4",
+                "Test5"
+        };
+
+        Random random = new Random();
+
+        for(int i=0; i<messages.length; i++) {
+            message.write(messages[i]);
+        }
+
+        try {
+            Thread.sleep(random.nextInt(2000));
+        } catch(InterruptedException e) {
+
+        }
+        message.write("Finished Reading");
+    }
+}
+
+class Reader implements Runnable {
+    private Message message;
+
+    public Reader(Message message) {
+        this.message = message;
+    }
+
+    @Override
+    public void run() {
+        Random random = new Random();
+
+        for(String lastMessage=message.read(); lastMessage!="Finished Reading"; lastMessage=message.read()) {
+            System.out.println(lastMessage);
+            try {
+                Thread.sleep(random.nextInt(2000));
+            } catch(InterruptedException e) {
+
+            }
+        }
     }
 }
