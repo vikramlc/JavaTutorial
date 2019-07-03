@@ -6,6 +6,18 @@ import java.util.Random;
 
 import static com.vikramlc.Main.EOF;
 
+// Advantage of synchronization:
+// * Makes sure that the threads are executed in order i.e. no two threads are adding content to
+// the buffer at the same time.
+
+// Disadvantages of Synchronization:
+// * Threads waiting to execute the synchronization code cannot be interrupted.
+// * A synchronization block cannot start in one method and end in another, obviously.
+// * We cannot test if the object's intrinsic lock is available. A thread wanting to execute the synchronization code
+// will have to wait until the lock is available or block until it is free.
+// * If multiple threads are waiting to get a lock, it's not FCFS. The lock will be acquired at random.
+
+// To overcome these disadvantages and prevent Thread Interference, we use java.util.concurrentlocks.lock interfaces.
 public class Main {
 
     public static final String EOF = "EOF";
