@@ -53,13 +53,16 @@ class MyProducer implements Runnable{
         Random random = new Random();
 
         for(String num: nums) {
-            System.out.println(color + "Adding " + num);
-
-            bufferLock.lock();
-            buffer.add(num);
-            bufferLock.unlock();
-
             try {
+                System.out.println(color + "Adding " + num);
+                bufferLock.lock();
+
+                try {
+                    buffer.add(num);
+                } finally {
+                    bufferLock.unlock();
+                }
+
                 Thread.sleep(random.nextInt(1000));
             } catch (InterruptedException e) {
                 System.out.println("Producer was interrupted.");
@@ -67,10 +70,13 @@ class MyProducer implements Runnable{
         }
 
         System.out.println(color + "Adding EOF and Exiting!!");
-
         bufferLock.lock();
-        buffer.add("EOF");
-        bufferLock.unlock();
+
+        try {
+            buffer.add("EOF");
+        } finally {
+            bufferLock.unlock();
+        }
 
     }
 }
@@ -90,18 +96,19 @@ class MyConsumer implements Runnable {
     public void run() {
         while(true) {
             bufferLock.lock();
+            try {
                 if(buffer.isEmpty()) {
-                    bufferLock.unlock();
                     continue;
                 }
                 if(buffer.get(0).equals(EOF)) {
                     System.out.println(color + "Exiting!!");
-                    bufferLock.unlock();
                     break;
                 } else {
                     System.out.println(color + "Removed " + buffer.remove(0));
                 }
-            bufferLock.unlock();
+            } finally {
+                bufferLock.unlock();
+            }
         }
     }
 }
