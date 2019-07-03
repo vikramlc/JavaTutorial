@@ -3,30 +3,33 @@ package com.vikramlc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.vikramlc.Main.EOF;
 
-// Advantage of synchronization:
-// * Makes sure that the threads are executed in order i.e. no two threads are adding content to
-// the buffer at the same time.
+// To overcome the disadvantages of Synchronization and prevent Thread Interference, we use java.util.concurrentlocks.lock interfaces.
+// Benefits of ReentrantLock in Java:
+// 1) Ability to lock interruptibly.
+// 2) Ability to timeout while waiting for lock.
+// 3) Power to create fair lock.
+// 4) API to get list of waiting thread for lock.
+// 5) Flexibility to try for lock without blocking.
 
-// Disadvantages of Synchronization:
-// * Threads waiting to execute the synchronization code cannot be interrupted.
-// * A synchronization block cannot start in one method and end in another, obviously.
-// * We cannot test if the object's intrinsic lock is available. A thread wanting to execute the synchronization code
-// will have to wait until the lock is available or block until it is free.
-// * If multiple threads are waiting to get a lock, it's not FCFS. The lock will be acquired at random.
-
-// To overcome these disadvantages and prevent Thread Interference, we use java.util.concurrentlocks.lock interfaces.
+// Disadvantages of ReentrantLock in Java:
+// 1) Programmer is responsible for acquiring and releasing lock.
+// 2) Wrapping method body inside try-finally block, which makes code unreadable and hides business logic.
 public class Main {
 
     public static final String EOF = "EOF";
 
     public static void main(String[] args) {
         List<String> buffer = new ArrayList<>();
-        MyProducer myProducer = new MyProducer(buffer, ThreadColor.ANSI_GREEN);
-        MyConsumer myConsumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE);
-        MyConsumer myConsumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN);
+        ReentrantLock bufferLock = new ReentrantLock();
+
+        MyProducer myProducer = new MyProducer(buffer, ThreadColor.ANSI_GREEN, bufferLock);
+        MyConsumer myConsumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE, bufferLock);
+        MyConsumer myConsumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN, bufferLock);
+
         new Thread(myProducer).start();
         new Thread(myConsumer1).start();
         new Thread(myConsumer2).start();
@@ -36,10 +39,12 @@ public class Main {
 class MyProducer implements Runnable{
     private List<String> buffer;
     private String color;
+    private ReentrantLock bufferLock;
 
-    public MyProducer(List<String> buffer, String color) {
+    public MyProducer(List<String> buffer, String color, ReentrantLock bufferLock) {
         this.buffer = buffer;
         this.color = color;
+        this.bufferLock = bufferLock;
     }
 
     @Override
@@ -49,9 +54,10 @@ class MyProducer implements Runnable{
 
         for(String num: nums) {
             System.out.println(color + "Adding " + num);
-            synchronized(buffer) {
-                buffer.add(num);
-            }
+
+            bufferLock.lock();
+            buffer.add(num);
+            bufferLock.unlock();
 
             try {
                 Thread.sleep(random.nextInt(1000));
@@ -61,9 +67,10 @@ class MyProducer implements Runnable{
         }
 
         System.out.println(color + "Adding EOF and Exiting!!");
-        synchronized (buffer) {
-            buffer.add("EOF");
-        }
+
+        bufferLock.lock();
+        buffer.add("EOF");
+        bufferLock.unlock();
 
     }
 }
@@ -71,26 +78,30 @@ class MyProducer implements Runnable{
 class MyConsumer implements Runnable {
     private List<String> buffer;
     private String color;
+    private ReentrantLock bufferLock;
 
-    public MyConsumer(List<String> buffer, String color) {
+    public MyConsumer(List<String> buffer, String color, ReentrantLock bufferLock) {
         this.buffer = buffer;
         this.color = color;
+        this.bufferLock = bufferLock;
     }
 
     @Override
     public void run() {
         while(true) {
-            synchronized (buffer) {
+            bufferLock.lock();
                 if(buffer.isEmpty()) {
+                    bufferLock.unlock();
                     continue;
                 }
                 if(buffer.get(0).equals(EOF)) {
                     System.out.println(color + "Exiting!!");
+                    bufferLock.unlock();
                     break;
                 } else {
                     System.out.println(color + "Removed " + buffer.remove(0));
                 }
-            }
+            bufferLock.unlock();
         }
     }
 }
