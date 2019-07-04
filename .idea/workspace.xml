@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78a1f3f5-1a11-4ea2-a157-b59c3663c2b0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/vikramlc/BankAccount.java" afterPath="" />
+    <list default="true" id="78a1f3f5-1a11-4ea2-a157-b59c3663c2b0" name="Default" comment="spot and fix - added the statement to unlock the lock.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Thread_1/com/vikramlc/Main.class" afterPath="$PROJECT_DIR$/out/production/Thread_1/com/vikramlc/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/vikramlc/Main.java" afterPath="$PROJECT_DIR$/src/com/vikramlc/Main.java" />
     </list>
@@ -19,10 +19,17 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+            <state relative-caret-position="141">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#315#316#0" expanded="true" />
+                <element signature="e#364#365#0" expanded="true" />
+                <element signature="e#490#491#0" expanded="true" />
+                <element signature="e#548#549#0" expanded="true" />
+                <element signature="e#720#721#0" expanded="true" />
+                <element signature="e#758#759#0" expanded="true" />
+                <element signature="e#1328#1329#0" expanded="true" />
+                <element signature="e#1362#1363#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,7 +53,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="thread-challenge-2" />
+        <entry key="$PROJECT_DIR$" value="thread-challenge-3" />
       </map>
     </option>
   </component>
@@ -426,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562263253539</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="spot and fix - added the statement to unlock the lock.">
+      <created>1562264719363</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1562264719363</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -494,7 +508,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Interrupt and Join concepts" />
     <MESSAGE value="Multiple Threads" />
     <MESSAGE value="Multiple Threads - Added comments" />
     <MESSAGE value="Synchronization part 1 - synchronising a function" />
@@ -519,7 +532,8 @@
     <MESSAGE value="using locks instead of synchrinize keyword" />
     <MESSAGE value="using trylock with 1 second timeout" />
     <MESSAGE value="spot and fix - 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="spot and fix - 1" />
+    <MESSAGE value="spot and fix - added the statement to unlock the lock." />
+    <option name="LAST_COMMIT_MESSAGE" value="spot and fix - added the statement to unlock the lock." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -541,7 +555,14 @@
         <state relative-caret-position="1292">
           <caret line="76" column="5" lean-forward="true" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#315#316#0" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#758#759#0" expanded="true" />
+            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#1362#1363#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -597,10 +618,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+        <state relative-caret-position="141">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#315#316#0" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#758#759#0" expanded="true" />
+            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#1362#1363#0" expanded="true" />
           </folding>
         </state>
       </provider>
