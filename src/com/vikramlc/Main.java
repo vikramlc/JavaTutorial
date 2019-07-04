@@ -1,56 +1,45 @@
 package com.vikramlc;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 public class Main {
 
+    private static Object lock = new Object();
+
     public static void main(String[] args) {
+        Thread t1 = new Thread(new Worker(ThreadColor.ANSI_CYAN), "Priority 10");
+        Thread t2 = new Thread(new Worker(ThreadColor.ANSI_PURPLE), "Priority 8");
+        Thread t3 = new Thread(new Worker(ThreadColor.ANSI_GREEN), "Priority 6");
+        Thread t4 = new Thread(new Worker(ThreadColor.ANSI_BLUE), "Priority 4");
+        Thread t5 = new Thread(new Worker(ThreadColor.ANSI_RED), "Priority 2");
 
-        ReentrantLock lock = new ReentrantLock();
+//        t1.setPriority(10);
+//        t2.setPriority(8);
+//        t3.setPriority(6);
+//        t4.setPriority(4);
+//        t5.setPriority(2);
 
-        final PolitePerson ajay = new PolitePerson("deepa", lock);
-        final PolitePerson deepa = new PolitePerson("ajay", lock);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ajay.sayHello(deepa);
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                deepa.sayHello(ajay);
-            }
-        }).start();
+        t3.start();
+        t5.start();
+        t2.start();
+        t4.start();
+        t1.start();
     }
 
-    public static class PolitePerson {
-        private String name;
-        ReentrantLock lock;
+    private static class Worker implements Runnable {
+        private int runCount = 1;
+        private String color;
 
-        public PolitePerson(String name, ReentrantLock lock) {
-            this.name = name;
-            this.lock = lock;
+        public Worker(String color) {
+            this.color = color;
         }
 
-        public String getName() {
-            return name;
+        @Override
+        public void run() {
+            synchronized (lock) {
+                for(int i=0; i<100; i++) {
+                    System.out.format(color + "%s: %d\n", Thread.currentThread().getName(), runCount++);
+                }
+            }
         }
-
-        public void sayHello(PolitePerson person) {
-
-            lock.lock();
-            System.out.format("%s: %s" + " has said Hello to me.%n", this.name, person.getName());
-            person.sayHelloBack(this);
-            lock.unlock();
-        }
-
-        public synchronized void sayHelloBack(PolitePerson person) {
-            System.out.format("%s: %s" + " has said Hello back to me.%n", this.name, person.getName());
-        }
-
     }
 
 }
