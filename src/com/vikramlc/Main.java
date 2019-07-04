@@ -3,25 +3,25 @@ package com.vikramlc;
 public class Main {
 
     public static void main(String[] args) {
-        final Worker worker1 = new Worker("Worker 1", true);
-        final Worker worker2 = new Worker("Worker 2", true);
-
-        final SharedResource sharedResource = new SharedResource(worker1);
+        BankAccount account = new BankAccount("12345-678", 1000.00);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                worker1.work(sharedResource, worker2);
+                account.deposit(300.00);
+                account.withdraw(50.00);
+                System.out.println("Thread 1: Account balance = " + account.getBalance());
             }
         }).start();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                worker2.work(sharedResource, worker1);
+                account.deposit(203.75);
+                account.withdraw(100.00);
+                System.out.println("Thread 2: Account balance = " + account.getBalance());
             }
         }).start();
-
     }
 
 }
