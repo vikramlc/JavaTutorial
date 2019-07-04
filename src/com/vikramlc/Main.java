@@ -2,56 +2,45 @@ package com.vikramlc;
 
 public class Main {
 
-    private static Object lock1 = new Object();
-    private static Object lock2 = new Object();
-
     public static void main(String[] args) {
-        new Thread1().start();
-        new Thread2().start();
+        final PolitePerson ajay = new PolitePerson("deepa");
+        final PolitePerson deepa = new PolitePerson("ajay");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ajay.sayHello(deepa);
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                deepa.sayHello(ajay);
+            }
+        }).start();
     }
 
-    public static class Thread1 extends Thread {
-        @Override
-        public void run() {
+    public static class PolitePerson {
+        private String name;
 
-            synchronized (lock1) {
-                System.out.println("Thread 1: Obtained lock1");
-
-                try {
-                    Thread.sleep(100);
-                } catch(InterruptedException e) {
-
-                }
-                System.out.println("Thread 1: Trying to obtain lock2");
-                synchronized (lock2) {
-                    System.out.println("Thread 1: Obtained lock1 and lock2");
-                }
-                System.out.println("Thread 1: Released lock2");
-            }
-            System.out.println("Thread 1: Released lock1 and lock2");
+        public PolitePerson(String name) {
+            this.name = name;
         }
-    }
 
-    public static class Thread2 extends Thread {
-        @Override
-        public void run() {
-
-            synchronized (lock1) {
-                System.out.println("Thread 2: Obtained lock1");
-
-                try {
-                    Thread.sleep(100);
-                } catch(InterruptedException e) {
-
-                }
-                System.out.println("Thread 2: Trying to obtain lock1");
-                synchronized (lock2) {
-                    System.out.println("Thread 2: Obtained lock1 and lock2");
-                }
-                System.out.println("Thread 2: Released lock2");
-            }
-            System.out.println("Thread 2: Released lock1 and lock2");
+        public String getName() {
+            return name;
         }
+
+        public synchronized void sayHello(PolitePerson person) {
+            System.out.format("%s: %s" + " has said Hello to me.%n", this.name, person.getName());
+            person.sayHelloBack(this);
+        }
+
+        public synchronized void sayHelloBack(PolitePerson person) {
+            System.out.format("%s: %s" + " has said Hello back to me.%n", this.name, person.getName());
+        }
+
     }
 
 }
