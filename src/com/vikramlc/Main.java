@@ -3,8 +3,8 @@ package com.vikramlc;
 public class Main {
 
     public static void main(String[] args) {
-        Tutor tutor = new Tutor();
-        Student student = new Student(tutor);
+        final NewTutor tutor = new NewTutor();
+        final NewStudent student = new NewStudent(tutor);
         tutor.setStudent(student);
 
         Thread tutorThread = new Thread(new Runnable() {
@@ -26,24 +26,28 @@ public class Main {
     }
 }
 
-class Tutor {
-    private Student student;
+class NewTutor {
+    private NewStudent student;
 
-    public void setStudent(Student student) {
+    public void setStudent(NewStudent student) {
         this.student = student;
     }
 
-    public synchronized void studyTime() {
-        System.out.println("Tutor has arrived");
-        try {
-            // wait for student to arrive and hand in assignment
-            Thread.sleep(300);
-        }
-        catch (InterruptedException e) {
+    public void studyTime() {
 
+        synchronized (this) {
+            System.out.println("Tutor has arrived");
+            synchronized (student) {
+                try {
+                    // wait for student to arrive
+                    this.wait();
+                } catch (InterruptedException e) {
+
+                }
+                student.startStudy();
+                System.out.println("Tutor is studying with student");
+            }
         }
-        student.startStudy();
-        System.out.println("Tutor is studying with student");
     }
 
     public void getProgressReport() {
@@ -52,11 +56,11 @@ class Tutor {
     }
 }
 
-class Student {
+class NewStudent {
 
-    private Tutor tutor;
+    private NewTutor tutor;
 
-    Student(Tutor tutor) {
+    NewStudent(NewTutor tutor) {
         this.tutor = tutor;
     }
 
@@ -65,8 +69,13 @@ class Student {
         System.out.println("Student is studying");
     }
 
-    public synchronized void handInAssignment() {
-        tutor.getProgressReport();
-        System.out.println("Student handed in assignment");
+    public void handInAssignment() {
+        synchronized (tutor) {
+            tutor.getProgressReport();
+
+                System.out.println("Student handed in assignment");
+                tutor.notifyAll();
+
+        }
     }
 }
