@@ -3,6 +3,7 @@ package com.vikramlc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.vikramlc.Main.EOF;
@@ -26,13 +27,37 @@ public class Main {
         List<String> buffer = new ArrayList<>();
         ReentrantLock bufferLock = new ReentrantLock();
 
+        // Created a thread of 3 threads which will carry out the tasks.
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
         MyProducer myProducer = new MyProducer(buffer, ThreadColor.ANSI_GREEN, bufferLock);
         MyConsumer myConsumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE, bufferLock);
         MyConsumer myConsumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN, bufferLock);
 
-        new Thread(myProducer).start();
-        new Thread(myConsumer1).start();
-        new Thread(myConsumer2).start();
+        executorService.execute(myProducer);
+        executorService.execute(myConsumer1);
+        executorService.execute(myConsumer2);
+
+        // To get something back from the execution of the tasks by the threads, we use Callable and Runnable methods.
+        Future<String> future = executorService.submit(new Callable<String>() {
+
+            @Override
+            public String call() throws Exception {
+                System.out.println(ThreadColor.ANSI_BLUE + "Being printed for the Callable class.");
+                return "This is a callable result.";
+            }
+        });
+
+        try {
+            System.out.println("Future value: " + future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        // Always shutdown the service else the thread is still running in the background.
+        executorService.shutdown();
     }
 }
 
@@ -94,20 +119,27 @@ class MyConsumer implements Runnable {
 
     @Override
     public void run() {
+        int counter = 0;
+
         while(true) {
-            bufferLock.lock();
-            try {
-                if(buffer.isEmpty()) {
-                    continue;
+            if(bufferLock.tryLock()) {
+                try {
+                    if(buffer.isEmpty()) {
+                        continue;
+                    }
+                    System.out.println(color + "Counter: " + counter);
+                    counter = 0;
+                    if(buffer.get(0).equals(EOF)) {
+                        System.out.println(color + "Exiting!!");
+                        break;
+                    } else {
+                        System.out.println(color + "Removed " + buffer.remove(0));
+                    }
+                } finally {
+                    bufferLock.unlock();
                 }
-                if(buffer.get(0).equals(EOF)) {
-                    System.out.println(color + "Exiting!!");
-                    break;
-                } else {
-                    System.out.println(color + "Removed " + buffer.remove(0));
-                }
-            } finally {
-                bufferLock.unlock();
+            } else {
+                counter++;
             }
         }
     }
