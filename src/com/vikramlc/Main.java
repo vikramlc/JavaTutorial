@@ -36,8 +36,8 @@ public class Main {
         @Override
         public void run() {
 
-            synchronized (lock2) {
-                System.out.println("Thread 2: Obtained lock2");
+            synchronized (lock1) {
+                System.out.println("Thread 2: Obtained lock1");
 
                 try {
                     Thread.sleep(100);
@@ -45,12 +45,12 @@ public class Main {
 
                 }
                 System.out.println("Thread 2: Trying to obtain lock1");
-                synchronized (lock1) {
-                    System.out.println("Thread 2: Obtained lock2 and lock1");
+                synchronized (lock2) {
+                    System.out.println("Thread 2: Obtained lock1 and lock2");
                 }
-                System.out.println("Thread 2: Released lock1");
+                System.out.println("Thread 2: Released lock2");
             }
-            System.out.println("Thread 2: Released lock2 and lock1");
+            System.out.println("Thread 2: Released lock1 and lock2");
         }
     }
 
