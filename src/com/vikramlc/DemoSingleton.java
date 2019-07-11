@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class DemoSingleton implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private volatile static DemoSingleton instance = null;
 
     private DemoSingleton() {
