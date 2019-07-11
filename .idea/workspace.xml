@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78a1f3f5-1a11-4ea2-a157-b59c3663c2b0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/vikramlc/BillPughSingleton.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Thread_1/com/vikramlc/Main.class" afterPath="$PROJECT_DIR$/out/production/Thread_1/com/vikramlc/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/vikramlc/Main.java" afterPath="$PROJECT_DIR$/src/com/vikramlc/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java" afterPath="$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,21 +16,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DemoSingleton.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DemoSingleton.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+            <state relative-caret-position="260">
+              <caret line="22" column="113" lean-forward="false" selection-start-line="22" selection-start-column="113" selection-end-line="22" selection-end-column="113" />
               <folding>
-                <element signature="e#441#442#0" expanded="true" />
-                <element signature="e#472#473#0" expanded="true" />
-                <element signature="e#498#499#0" expanded="true" />
+                <element signature="e#779#780#0" expanded="true" />
+                <element signature="e#810#811#0" expanded="true" />
+                <element signature="e#860#861#0" expanded="true" />
+                <element signature="e#884#885#0" expanded="true" />
+                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#941#942#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
@@ -84,8 +86,8 @@
         <option value="$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java" />
         <option value="$PROJECT_DIR$/src/com/vikramlc/StaticBlockSingleton.java" />
         <option value="$PROJECT_DIR$/src/com/vikramlc/BillPughSingleton.java" />
-        <option value="$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java" />
         <option value="$PROJECT_DIR$/src/com/vikramlc/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java" />
       </list>
     </option>
   </component>
@@ -492,11 +494,19 @@
       <option name="project" value="LOCAL" />
       <updated>1562824552725</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="serilaization without readResolve">
+      <created>1562825311406</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1562825311406</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -581,8 +591,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Synchronization advantages, disadvantages and better solution." />
-    <MESSAGE value="Using ReentrantLock without try-catch-finally block" />
     <MESSAGE value="Using ReentrantLock with try-finally block" />
     <MESSAGE value="Using Executor service for multiple thread creation and managing huge number of tasks" />
     <MESSAGE value="Using ArrayBlockingQueue for synchronization" />
@@ -606,7 +614,9 @@
     <MESSAGE value="double checked locking to avoid each instance cretaion per thread." />
     <MESSAGE value="static initialization" />
     <MESSAGE value="Best solution - Bill Pugh" />
-    <option name="LAST_COMMIT_MESSAGE" value="Best solution - Bill Pugh" />
+    <MESSAGE value="serilaization without readResolve" />
+    <MESSAGE value="serilaization with readResolve" />
+    <option name="LAST_COMMIT_MESSAGE" value="serilaization with readResolve" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -707,23 +717,26 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vikramlc/BankAccount.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-          <folding>
-            <element signature="e#441#442#0" expanded="true" />
-            <element signature="e#472#473#0" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
           <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vikramlc/DemoSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="22" column="113" lean-forward="false" selection-start-line="22" selection-start-column="113" selection-end-line="22" selection-end-column="113" />
+          <folding>
+            <element signature="e#779#780#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+            <element signature="e#860#861#0" expanded="true" />
+            <element signature="e#884#885#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#941#942#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
