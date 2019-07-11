@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78a1f3f5-1a11-4ea2-a157-b59c3663c2b0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Thread_1/com/vikramlc/LazySingleton.class" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java" afterPath="$PROJECT_DIR$/src/com/vikramlc/StaticBlockSingleton.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java" afterPath="$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/vikramlc/Main.java" afterPath="$PROJECT_DIR$/src/com/vikramlc/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,21 +17,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
+      <file leaf-file-name="StaticBlockSingleton.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/vikramlc/StaticBlockSingleton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-              <folding />
+            <state relative-caret-position="255">
+              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+              <folding>
+                <element signature="e#406#407#0" expanded="true" />
+                <element signature="e#437#438#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LazySingleton.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+              <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -53,7 +58,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="singleton-pattern-eager-initialization" />
+        <entry key="$PROJECT_DIR$" value="singleton-lazy-initialization" />
       </map>
     </option>
   </component>
@@ -75,8 +80,9 @@
         <option value="$PROJECT_DIR$/src/com/vikramlc/Worker.java" />
         <option value="$PROJECT_DIR$/src/com/vikramlc/SharedResource.java" />
         <option value="$PROJECT_DIR$/src/com/vikramlc/BankAccount.java" />
-        <option value="$PROJECT_DIR$/src/com/vikramlc/Main.java" />
         <option value="$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java" />
+        <option value="$PROJECT_DIR$/src/com/vikramlc/StaticBlockSingleton.java" />
+        <option value="$PROJECT_DIR$/src/com/vikramlc/Main.java" />
       </list>
     </option>
   </component>
@@ -462,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562823563018</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="double checked locking to avoid each instance cretaion per thread.">
+      <created>1562823646031</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1562823646031</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -551,7 +564,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="producer consumer deadlocks" />
     <MESSAGE value="producer consumer java concurrency" />
     <MESSAGE value="producer consumer synchronized solution" />
     <MESSAGE value="Synchronization advantages, disadvantages and better solution." />
@@ -576,7 +588,8 @@
     <MESSAGE value="spot and fix - had been synchronised in incorrect order" />
     <MESSAGE value="lazy initialization" />
     <MESSAGE value="drawback: can create one instance per thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="drawback: can create one instance per thread" />
+    <MESSAGE value="double checked locking to avoid each instance cretaion per thread." />
+    <option name="LAST_COMMIT_MESSAGE" value="double checked locking to avoid each instance cretaion per thread." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -677,18 +690,21 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vikramlc/BankAccount.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vikramlc/StaticBlockSingleton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#437#438#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vikramlc/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
           <folding />
         </state>
       </provider>
