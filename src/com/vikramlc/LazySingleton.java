@@ -12,7 +12,11 @@ public class LazySingleton {
     public static LazySingleton getInstance() {
         if(instance == null) {
             synchronized (LazySingleton.class) {
-                instance = new LazySingleton();
+
+                // Double check
+                if(instance == null) {
+                    instance = new LazySingleton();
+                }
             }
         }
 

@@ -28,8 +28,8 @@
       <file leaf-file-name="LazySingleton.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+            <state relative-caret-position="255">
+              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -455,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562823435617</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="drawback: can create one instance per thread">
+      <created>1562823563018</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1562823563018</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -544,7 +551,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Synchronization part 2 - synchronising a block" />
     <MESSAGE value="producer consumer deadlocks" />
     <MESSAGE value="producer consumer java concurrency" />
     <MESSAGE value="producer consumer synchronized solution" />
@@ -569,7 +575,8 @@
     <MESSAGE value="spot and fix - had been over-synchronized" />
     <MESSAGE value="spot and fix - had been synchronised in incorrect order" />
     <MESSAGE value="lazy initialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="lazy initialization" />
+    <MESSAGE value="drawback: can create one instance per thread" />
+    <option name="LAST_COMMIT_MESSAGE" value="drawback: can create one instance per thread" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -680,8 +687,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vikramlc/LazySingleton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+        <state relative-caret-position="255">
+          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
           <folding />
         </state>
       </provider>
